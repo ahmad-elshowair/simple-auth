@@ -90,6 +90,8 @@ const register = async (req, res) => {
       token: token,
       user: newUser.rows[0]
     });
+    // display created user in the console
+    // console.log(newUser.rows[0]);
     connection.release();
   } catch (error) {
     console.error(`the error is: ${error.message}`);

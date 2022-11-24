@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import userApi from '../Api/user';
 
 
 export const Register = () => {
@@ -18,13 +19,34 @@ export const Register = () => {
       }
     });
   };
+  const submitUser = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await userApi.post('register', {
+        name: userInputs.userName,
+        email: userInputs.userEmail,
+        password: userInputs.userPassword
+      });
+
+      console.log(response.data);
+      // empty the user inputs
+      setUserInputs({
+        userName: '',
+        userEmail: '',
+        userPassword: ''
+      });
+
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
 
   return (
     <>
       <section className=''>
         <div className="container">
           <h1 className='mb-3 text-center'>Register</h1>
-          <form>
+          <form onSubmit={submitUser}>
             <div className="mb-3">
               <input
                 type="text"
@@ -54,7 +76,7 @@ export const Register = () => {
                 id="userPassword"
                 className="form-control"
                 placeholder='user password ...'
-                value={userInputs.userName}
+                value={userInputs.userPassword}
                 onChange={(e)=>(handleOnChange(e))}
               />
             </div>

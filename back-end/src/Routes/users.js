@@ -5,7 +5,7 @@ import { authorization } from '../middleware/authorization.js'
 
 const router = Router();
 
-router.get('/', authorization, users.getUsers);
+router.get('/', users.getUsers);
 router.get('/get-user/:user_id', authorization, users.getAUser);
 router.post('/register', validation, users.register);
 router.post('/login', validation, users.login);
