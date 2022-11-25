@@ -1,10 +1,15 @@
-import React from 'react'
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const Dashboard = ({ setAuth }) => {
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <button onClick={() => setAuth(false)}>Logout</button>
-    </div>
+    <>
+      <section className='dashboard-section'>
+        <div className="container">
+          <h1>Dashboard</h1>
+          <button className='btn btn-danger' onClick={() => setAuth(false)}>Logout</button>
+        </div>
+      </section>
+    </>
   )
 }
