@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import userApi from '../Api/user';
 
 
-export const Register = () => {
+export const Register = ({setAuth}) => {
   const [userInputs, setUserInputs] = React.useState({
     userName: '',
     userEmail: '',
@@ -28,7 +28,8 @@ export const Register = () => {
         password: userInputs.userPassword
       });
 
-      console.log(response.data);
+      localStorage.setItem('token', response.data.token);
+      setAuth(true);
       // empty the user inputs
       setUserInputs({
         userName: '',
