@@ -1,5 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import user from '../Api/user';
+import { Link } from 'react-router-dom'
 
 
 export const Login = ({ setAuth }) => {
@@ -17,12 +19,27 @@ export const Login = ({ setAuth }) => {
       }
     });
   };
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await user.post("/login", {
+        email: loginInputs.userEmail,
+        password: loginInputs.userPassword
+      });
+      console.log(response.data);
+      localStorage.setItem('token', response.data.token);
+      setAuth(true);
+    } catch (error) {
+      throw new Error(error.message);
+    } 
+  }
   return (
     <>
       <section className="login-section">
         <article className="container">
           <h1 className='mb-5 text-center'>Login</h1>
-          <form action="">
+          <form action="" onSubmit={handleLogin}>
             <div className="mb-3">
               <input
                 type="email"
@@ -45,12 +62,13 @@ export const Login = ({ setAuth }) => {
                 onChange={(event)=> handleOnChangeLogin(event)}
               />
             </div>
-            <div className="d-grid gap-2">
+            <div className="d-flex justify-content-between">
               <button
                 className='btn btn-primary'
               >
                 Login
               </button>
+              <Link to='/register'>Register</Link>
             </div>
           </form>
         </article>

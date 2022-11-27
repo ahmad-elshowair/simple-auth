@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import userApi from '../Api/user';
+import { Link } from 'react-router-dom';
 
 
 export const Register = ({setAuth}) => {
@@ -37,6 +38,7 @@ export const Register = ({setAuth}) => {
         userPassword: ''
       });
 
+      console.log(response.data);
     } catch (error) {
       throw new Error(error.message);
     }
@@ -81,8 +83,9 @@ export const Register = ({setAuth}) => {
                 onChange={(e)=>(handleOnChange(e))}
               />
             </div>
-            <div className="d-grid gap-2">
+            <div className="d-flex justify-content-between">
               <button className='btn btn-primary' type="submit">Register</button>
+              <Link to='/login'>Login in</Link>
             </div>
           </form>
         </div>
