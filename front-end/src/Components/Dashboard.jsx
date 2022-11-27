@@ -7,7 +7,7 @@ export const Dashboard = ({ setAuth }) => {
       <section className='dashboard-section'>
         <div className="container">
           <h1>Dashboard</h1>
-          <button className='btn btn-danger' onClick={() => setAuth(false)}>Logout</button>
+          <button className='btn btn-danger ' onClick={() => setAuth(false)}>Logout</button>
         </div>
       </section>
     </>
