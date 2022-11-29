@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import user from '../Api/user';
 import { Link } from 'react-router-dom'
+import axios from 'axios';
 
 
 export const Login = ({ setAuth }) => {
@@ -23,10 +23,12 @@ export const Login = ({ setAuth }) => {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await user.post("/login", {
-        email: loginInputs.userEmail,
-        password: loginInputs.userPassword
-      });
+      const response = await axios.post("http://localhost:5000/users/login",
+        {
+          email: loginInputs.userEmail,
+          password: loginInputs.userPassword
+        }
+      );
       console.log(response.data);
       localStorage.setItem('token', response.data.token);
       setAuth(true);

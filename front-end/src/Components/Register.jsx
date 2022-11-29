@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import userApi from '../Api/user';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 export const Register = ({setAuth}) => {
@@ -23,7 +23,7 @@ export const Register = ({setAuth}) => {
   const submitUser = async (event) => {
     event.preventDefault();
     try {
-      const response = await userApi.post('register', {
+      const response = await axios.post('http://localhost:5000/users/register', {
         name: userInputs.userName,
         email: userInputs.userEmail,
         password: userInputs.userPassword
