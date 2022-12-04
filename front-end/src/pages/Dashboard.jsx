@@ -4,7 +4,8 @@ import axios from 'axios';
 
 export const Dashboard = ({ setAuth }) => {
 
-  const [userName, setUserName] = React.useState("")
+  const [userName, setUserName] = React.useState("");
+
   const getUserName = async () => {
     try {
       const response = await axios.get('http://localhost:5000/dashboard',
@@ -21,8 +22,13 @@ export const Dashboard = ({ setAuth }) => {
 
   React.useEffect(() => {
     getUserName()
-  });
+  },[]);
   
+  const logout = (event) => {
+    event.preventDefault();
+    localStorage.removeItem("token");
+    setAuth(false);
+  }
   return (
     <>
       <section className='dashboard-section'>
@@ -33,7 +39,7 @@ export const Dashboard = ({ setAuth }) => {
               userName ? `Hi ${userName}`: "loading..."
             }
           </h3>
-          <button className='btn btn-danger ' onClick={() => setAuth(false)}>Logout</button>
+          <button className='btn btn-danger ' onClick={(event) => logout(event)}>Logout</button>
         </div>
       </section>
     </>
