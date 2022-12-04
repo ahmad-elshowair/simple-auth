@@ -1,10 +1,11 @@
 import './App.css';
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { Login } from './Components/Login';
-import { Dashboard } from './Components/Dashboard';
-import { Register } from './Components/Register';
-
+import { Login } from './pages/Login';
+import { Dashboard } from './pages/Dashboard';
+import { Register } from './pages/Register';
+import { Home } from './pages/Home';
+import { Layout } from './pages/Layout';
 function App() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -16,24 +17,27 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route
-            path='/login'
-            element={
-              !isAuthenticated ? <Login setAuth={setAuth} /> : <Navigate replace to='/dashboard' />
-            }
-          />
-          <Route
-            path='/dashboard'
-            element={
-              isAuthenticated ? <Dashboard setAuth={setAuth} /> : <Navigate replace to='/login' />
-            }
-          />
-          <Route
-            path='/register'
-            element={
-              !isAuthenticated ? <Register setAuth={setAuth} /> : <Navigate replace to='/login' />
-            }
-          />
+          <Route path='/' element={<Layout/>}>
+            <Route index  element={ <Home/>} />
+            <Route
+              path='/login'
+              element={
+                !isAuthenticated ? <Login setAuth={setAuth} /> : <Navigate replace to='/dashboard' />
+              }
+            />
+            <Route
+              path='/dashboard'
+              element={
+                isAuthenticated ? <Dashboard setAuth={setAuth} /> : <Navigate replace to='/login' />
+              }
+            />
+            <Route
+              path='/register'
+              element={
+                !isAuthenticated ? <Register setAuth={setAuth} /> : <Navigate replace to='/login' />
+              }
+            />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
