@@ -2,7 +2,7 @@
 
 CREATE DATABASE authenticity OWNER=ahmad_elshowair;
 
--- create extention
+-- create extension
 
 CREATE EXTENSION "uuid-ossp";
 
@@ -21,27 +21,3 @@ CREATE TABLE
 DROP TABLE users;
 
 -- insert fake users
-
-INSERT INTO
-    users(
-        user_name,
-        user_email,
-        user_password
-    )
-VALUES (
-        'ahmad elshowair',
-        'ahmad@mail.com',
-        'ahmad123'
-    ), (
-        'thuy pahm',
-        'thuy@mail.com',
-        'thuy123'
-    );
-
---display all users
-
-SELECT * FROM users;
-
--- change the datatype of user_password column
-
-ALTER TABLE users ALTER COLUMN user_password TYPE VARCHAR(255);
